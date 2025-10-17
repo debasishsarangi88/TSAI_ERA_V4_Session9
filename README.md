@@ -14,65 +14,10 @@ This project implements ImageNet training for ResNet50 from scratch, targeting 7
 ```
 Session9/
 ├── imagenet_training_resnet50.ipynb  # Main training notebook
-├── setup_ec2.sh                      # EC2 deployment script
-├── upload_to_hf.py                   # Hugging Face upload script
-└── README.md                         # This file
+├── README.md                         # This file
+└── .gitignore                        # Git ignore file
 ```
 
-## 🚀 Quick Start
-
-### 1. Test on Google Colab
-
-1. Open `imagenet_training_resnet50.ipynb` in Google Colab
-2. Run all cells to test the training pipeline
-3. The notebook uses CIFAR-100 for testing (similar structure to ImageNet)
-
-### 2. Deploy to EC2
-
-1. Launch an EC2 instance:
-   - **Recommended**: `g4dn.2xlarge` (18 hours ≈ $13.54)
-   - **Alternative**: `g4dn.4xlarge` (12 hours ≈ $14.45)
-   - **Premium**: `p3.2xlarge` (8 hours ≈ $24.48)
-
-2. Connect to your instance and run:
-   ```bash
-   # Copy the setup script
-   scp setup_ec2.sh ec2-user@your-instance-ip:~/
-   
-   # Connect to instance
-   ssh ec2-user@your-instance-ip
-   
-   # Run setup
-   bash setup_ec2.sh
-   ```
-
-3. Download ImageNet dataset:
-   - Register at [ImageNet](https://www.image-net.org/)
-   - Download `ILSVRC2012_img_train.tar` and `ILSVRC2012_img_val.tar`
-   - Extract to `./imagenet/` directory
-
-4. Start training:
-   ```bash
-   ./run_training.sh
-   ```
-
-### 3. Upload to Hugging Face
-
-1. Get your Hugging Face token:
-   - Go to [HF Settings](https://huggingface.co/settings/tokens)
-   - Create a new token
-
-2. Set environment variable:
-   ```bash
-   export HF_TOKEN=your_token_here
-   ```
-
-3. Update `upload_to_hf.py` with your username
-
-4. Run upload:
-   ```bash
-   python upload_to_hf.py
-   ```
 
 ## 💰 Budget Optimization
 
