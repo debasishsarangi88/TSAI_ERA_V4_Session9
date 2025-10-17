@@ -1,0 +1,50 @@
+# Exclude setup and upload scripts
+setup_ec2.sh
+upload_to_hf.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Data directories
+data/
+imagenet/
+checkpoints/
+logs/
+
+# Environment variables
+.env
+.venv
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
