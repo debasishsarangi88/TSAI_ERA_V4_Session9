@@ -14,8 +14,30 @@ This project implements ImageNet training for ResNet50 from scratch, targeting 7
 ```
 Session9/
 ├── imagenet_training_resnet50.ipynb  # Main training notebook
-├── README.md                         # This file
-└── .gitignore                        # Git ignore file
+├── model.py                          # ResNet50 architecture
+├── inference.py                      # Model loading & prediction
+├── app.py                           # Gradio web interface
+├── upload_to_hf.py                  # HF Hub upload script
+├── config.json                      # Model configuration
+├── requirements.txt                 # Python dependencies
+├── best_model.pth                  # Trained model weights
+├── README.md                        # This file
+└── .gitignore                       # Git ignore file
+```
+
+## 🚀 Hugging Face Deployment
+
+All files needed for Hugging Face deployment are included in the main directory:
+
+- **Model Architecture**: Complete ResNet50 implementation (`model.py`)
+- **Inference Code**: Model loading and prediction functions (`inference.py`)
+- **Gradio App**: Web interface for Hugging Face Spaces (`app.py`)
+- **Upload Scripts**: Automated deployment to HF Hub (`upload_to_hf.py`)
+- **Configuration**: Model settings and dependencies
+
+### Quick Deployment
+```bash
+python upload_to_hf.py --username YOUR_USERNAME --repo_name resnet50-imagenet
 ```
 
 

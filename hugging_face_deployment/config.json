@@ -1,0 +1,35 @@
+{
+  "model_name": "resnet50-imagenet",
+  "model_type": "image_classification",
+  "num_classes": 1000,
+  "input_size": [3, 224, 224],
+  "architecture": "ResNet50",
+  "training_config": {
+    "epochs": 90,
+    "learning_rate": 0.1,
+    "batch_size": 64,
+    "weight_decay": 1e-4,
+    "momentum": 0.9,
+    "mixed_precision": true,
+    "target_accuracy": 75.0
+  },
+  "preprocessing": {
+    "mean": [0.485, 0.456, 0.406],
+    "std": [0.229, 0.224, 0.225],
+    "input_size": 224,
+    "resize": 256,
+    "center_crop": true
+  },
+  "model_info": {
+    "parameters": 25557032,
+    "model_size_mb": 102.2,
+    "framework": "pytorch",
+    "quantization": "fp16"
+  },
+  "performance": {
+    "top1_accuracy": 75.0,
+    "top5_accuracy": 92.0,
+    "inference_time_ms": 15.0,
+    "memory_usage_mb": 512
+  }
+}
