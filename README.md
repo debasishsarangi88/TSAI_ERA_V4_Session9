@@ -124,6 +124,50 @@ Based on the [Stanford DAWN Benchmark](https://dawnd9.sites.stanford.edu/imagene
 
 1. **CUDA Out of Memory**:
    - Reduce batch size
+
+## 📦 Production Data Loading (ImageNet‑1K)
+
+When `PRODUCTION_MODE=True`, the notebook trains ResNet50 on ImageNet‑1K. The dataloader is robust and supports two common layouts:
+
+### 1) Official torchvision ImageNet layout (preferred)
+- Root: `./imagenet/`
+- Structure required by `torchvision.datasets.ImageNet`:
+  - `imagenet/train/<class_name>/*.JPEG`
+  - `imagenet/val/<class_name>/*.JPEG`
+  - Includes the ImageNet metadata index files expected by torchvision.
+
+If this layout is detected, you will see:
+```
+✅ Loaded torchvision.datasets.ImageNet
+```
+
+### 2) Generic class‑folder layout (automatic fallback)
+If the official index files are missing, the loader automatically falls back to `torchvision.datasets.ImageFolder` with the same folder structure:
+```
+imagenet/train/<class_name>/*.JPEG
+imagenet/val/<class_name>/*.JPEG
+```
+In this case you will see:
+```
+⚠️ torchvision.datasets.ImageNet failed: <reason>
+   Falling back to torchvision.datasets.ImageFolder (expects class subfolders)...
+✅ Loaded torchvision.datasets.ImageFolder
+```
+
+### Changing the dataset path
+- Default path in the notebook is `./imagenet/`.
+- On EC2, update the call in `get_imagenet_dataset()` to your mount point, e.g. `/mnt/imagenet` or `/efs/imagenet`.
+
+### Transforms used (production)
+- Train: `RandomResizedCrop(224)`, `RandomHorizontalFlip`, color jitter, rotation, ImageNet normalization.
+- Val: `Resize(256)`, `CenterCrop(224)`, ImageNet normalization.
+
+### Quick production checklist
+- Set `TESTING_MODE=False`, `PRODUCTION_MODE=True`.
+- Ensure dataset present at your chosen `data_path` with train/val class folders.
+- Recommended storage: fast EBS (gp3/io2) or local NVMe; ~150–200 GB free.
+- If you hit OOM, lower `batch_size` from 64 → 32 or 16; keep FP16 on.
+
    - Use gradient accumulation
    - Enable mixed precision
 
